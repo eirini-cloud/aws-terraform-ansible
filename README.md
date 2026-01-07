@@ -4,7 +4,7 @@
 
 This repository contains infrastructure and configuration automation built as part of a 12-Week Technical Depth Programme focused on production-style engineering practices.
 
-The goal is to model *real-world workflows* used by infrastructure and platform teams.
+The goal is to model *real-world workflows* used by infrastructure and platform teams. Details of the Programme on eirini.cloud
 
 ----
 
