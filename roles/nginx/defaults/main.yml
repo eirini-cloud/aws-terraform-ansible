@@ -1,0 +1,5 @@
+---
+app_name: app2
+app_title: "App2 - Deployed via Ansible"
+app_message: "Week 6: Configuration Management"
+nginx_docroot: /usr/share/nginx/html
