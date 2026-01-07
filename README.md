@@ -8,7 +8,7 @@ The goal is to model *real-world workflows* used by infrastructure and platform 
 
 ----
 
-## 🧱 What’s in this repository
+## What’s in this repository
 
 ### Terraform
 - AWS infrastructure provisioning
@@ -28,7 +28,7 @@ The goal is to model *real-world workflows* used by infrastructure and platform 
 
 ----
 
-## 🔁 CI/CD Workflow
+## CI/CD Workflow
 
 This repository uses **GitHub Actions** to enforce safe and repeatable changes.
 
