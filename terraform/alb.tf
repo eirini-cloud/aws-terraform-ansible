@@ -42,7 +42,7 @@ resource "aws_lb" "bootcamp_alb" {
   load_balancer_type = "application"
   internal           = false
 
- subnets = [
+  subnets = [
     "subnet-043e9c38b79dcbc18",
     "subnet-0ee086656d65855e3"
   ]

@@ -17,10 +17,10 @@ data "aws_security_group" "web_sg" {
 }
 
 resource "aws_security_group_rule" "alb_to_web_http" {
-  type                     = "ingress"
-  from_port                = 80
-  to_port                  = 80
-  protocol                 = "tcp"
+  type      = "ingress"
+  from_port = 80
+  to_port   = 80
+  protocol  = "tcp"
 
   security_group_id        = data.aws_security_group.web_sg.id
   source_security_group_id = data.aws_security_group.alb_sg.id
