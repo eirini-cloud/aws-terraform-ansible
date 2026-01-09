@@ -1,7 +1,7 @@
 ---
 - name: Ensure application directory exists
   ansible.builtin.file:
-    path: "{{ nginx_docroot }}/{{ app_name }}"
+    path: "{{ nginx_docroot }}/{{ nginx_app_name }}"
     state: directory
     owner: root
     group: root
@@ -10,7 +10,7 @@
 - name: Deploy application index.html
   ansible.builtin.template:
     src: index.html.j2
-    dest: "{{ nginx_docroot }}/{{ app_name }}/index.html"
+    dest: "{{ nginx_docroot }}/{{ nginx_app_name }}/index.html"
     owner: root
     group: root
     mode: '0644'
