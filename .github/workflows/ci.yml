@@ -1,4 +1,4 @@
-name: CI - Ansible Lint
+name: CI
 
 on:
   push:
@@ -6,21 +6,35 @@ on:
 
 jobs:
   ansible_lint:
+    name: Ansible Lint
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
-      - name: Install Ansible + ansible-lint
-        run: |
-          python -m pip install --upgrade pip
+      - run: |
           pip install ansible ansible-lint
+      - run: ansible-lint site.yml
 
-      - name: Run ansible-lint
-        run: ansible-lint site.yml
+  terraform_ci:
+    name: Terraform fmt / validate / plan
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::912204777726:role/github-actions-terraform
+          aws-region: eu-north-1
+
+      - run: terraform fmt -check -recursive
+      - run: terraform init -input=false
+      - run: terraform validate
+      - run: terraform plan -input=false -no-color
+
