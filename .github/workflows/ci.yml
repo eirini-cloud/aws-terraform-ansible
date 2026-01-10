@@ -21,7 +21,7 @@ jobs:
           pip install ansible ansible-lint
       - run: ansible-lint site.yml
 
-  terraform_ci:
+   terraform_ci:
     name: Terraform fmt / validate / plan
     runs-on: ubuntu-latest
     defaults:
