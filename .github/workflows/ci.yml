@@ -1,4 +1,7 @@
- push:
+name: CI
+
+on:
+  push:
   pull_request:
 
 permissions:
@@ -9,24 +12,37 @@ jobs:
   ansible_lint:
     name: Ansible Lint
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: |
-          pip install ansible ansible-lint
-      - run: ansible-lint site.yml
 
-   terraform_ci:
+      - name: Install Ansible and ansible-lint
+        run: |
+          pip install ansible ansible-lint
+
+      - name: Run ansible-lint
+        run: ansible-lint site.yml
+
+  terraform_ci:
     name: Terraform fmt / validate / plan
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: terraform
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -34,14 +50,15 @@ jobs:
           role-to-assume: arn:aws:iam::912204777726:role/github-actions-terraform
           aws-region: eu-north-1
 
-    - name: Terraform fmt (check)
-      run: terraform fmt -check -recursive
+      - name: Terraform fmt (check)
+        run: terraform fmt -check -recursive
 
-    - name: Terraform init
-      run: terraform init -input=false
+      - name: Terraform init
+        run: terraform init -input=false
 
-    - name: Terraform validate
-      run: terraform validate
+      - name: Terraform validate
+        run: terraform validate
 
-    - name: Terraform plan
-      run: terraform plan -input=false -no-color -var-file=ci.tfvars
+      - name: Terraform plan
+        run: terraform plan -input=false -no-color -var-file=ci.tfvars
+
