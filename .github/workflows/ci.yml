@@ -37,8 +37,14 @@ jobs:
           role-to-assume: arn:aws:iam::912204777726:role/github-actions-terraform
           aws-region: eu-north-1
 
-      - run: terraform fmt -check -recursive
-      - run: terraform init -input=false
-      - run: terraform validate
-      - run: terraform plan -input=false -no-color
+    - name: Terraform fmt (check)
+      run: terraform fmt -check -recursive
 
+    - name: Terraform init
+      run: terraform init -input=false
+
+    - name: Terraform validate
+      run: terraform validate
+
+    - name: Terraform plan
+      run: terraform plan -input=false -no-color -var-file=ci.tfvars
