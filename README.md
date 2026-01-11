@@ -19,6 +19,14 @@ The goal is to model *real-world workflows* used by infrastructure and platform 
   - Security groups
 - Designed to be executed via CI/CD (GitHub Actions)
 
+
+## Terraform State
+
+ - Terraform uses a remote S3 backend with DynamoDB locking to ensure
+ - safe, idempotent CI/CD execution.
+
+
+
 ### Ansible
 - Role-based configuration management
 - Idempotent playbooks
