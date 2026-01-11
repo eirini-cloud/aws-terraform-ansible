@@ -31,6 +31,7 @@ The goal is to model *real-world workflows* used by infrastructure and platform 
 ## CI/CD Workflow
 
 This repository uses **GitHub Actions** to enforce safe and repeatable changes.
+Terraform CI/CD fully reconciled.
 
 ### Pull Requests
 - Terraform formatting, validation, and plan
