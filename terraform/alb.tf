@@ -41,6 +41,7 @@ resource "aws_lb" "bootcamp_alb" {
   name               = "bootcamp-alb"
   load_balancer_type = "application"
   internal           = false
+  ip_address_type    = "ipv4"
 
   subnets = [
     "subnet-043e9c38b79dcbc18",
