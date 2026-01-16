@@ -43,3 +43,10 @@ jobs:
          tags: ghcr.io/${{ github.repository }}/eirini-app:${{ env.IMAGE_TAG }}
          cache-from: type=gha
          cache-to: type=gha,mode=max
+
+      - name: Scan image for vulnerabilities
+        uses: aquasecurity/trivy-action@v0.20.0
+        with:
+          image-ref: ghcr.io/${{ github.repository }}/eirini-app:${{ env.IMAGE_TAG }}
+          format: table
+          exit-code: 0
