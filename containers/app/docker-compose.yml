@@ -1,0 +1,6 @@
+services:
+  web:
+    image: eirini-app
+    container_name: eirini-web
+    ports:
+      - "8080:80"
