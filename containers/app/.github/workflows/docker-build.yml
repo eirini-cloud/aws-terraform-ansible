@@ -1,0 +1,28 @@
+name: Docker Build (Week 9)
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "containers/app/**"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "containers/app/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        run: |
+          docker build \
+            -t eirini-app:ci \
+            ./containers/app
