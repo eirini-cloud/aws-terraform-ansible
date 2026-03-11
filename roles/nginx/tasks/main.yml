@@ -1,7 +1,7 @@
 ---
-- name: Ensure application directory exists
+- name: Ensure nginx docroot exists
   ansible.builtin.file:
-    path: "{{ nginx_docroot }}/{{ nginx_app_name }}"
+    path: "{{ nginx_docroot }}"
     state: directory
     owner: root
     group: root
@@ -10,7 +10,7 @@
 - name: Deploy main index.html
   ansible.builtin.template:
     src: index.html.j2
-    dest: "{{ nginx_docroot }}/{{ nginx_app_name }}/index.html"
+    dest: "{{ nginx_docroot }}/index.html"
     owner: root
     group: root
     mode: '0644'
@@ -18,7 +18,7 @@
 
 - name: Ensure app1 directory exists
   ansible.builtin.file:
-    path: "{{ nginx_docroot }}/{{ nginx_app_name }}/app1"
+    path: "{{ nginx_docroot }}/app1"
     state: directory
     owner: root
     group: root
@@ -27,7 +27,7 @@
 - name: Deploy app1 index.html
   ansible.builtin.template:
     src: app1.html.j2
-    dest: "{{ nginx_docroot }}/{{ nginx_app_name }}/app1/index.html"
+    dest: "{{ nginx_docroot }}/app1/index.html"
     owner: root
     group: root
     mode: '0644'
@@ -35,7 +35,7 @@
 
 - name: Ensure app2 directory exists
   ansible.builtin.file:
-    path: "{{ nginx_docroot }}/{{ nginx_app_name }}/app2"
+    path: "{{ nginx_docroot }}/app2"
     state: directory
     owner: root
     group: root
@@ -44,7 +44,7 @@
 - name: Deploy app2 index.html
   ansible.builtin.template:
     src: app2.html.j2
-    dest: "{{ nginx_docroot }}/{{ nginx_app_name }}/app2/index.html"
+    dest: "{{ nginx_docroot }}/app2/index.html"
     owner: root
     group: root
     mode: '0644'
