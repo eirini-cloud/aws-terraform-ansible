@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NVIDIA AI Infrastructure & Operations - Study Programme</title>
+
+<style>
+:root {
+  --bg: #0f172a;
+  --card-bg: #111827;
+  --card-border: #334155;
+  --accent: #2dd4bf;
+  --accent-muted: #99f6e4;
+  --text-main: #e5e7eb;
+  --text-muted: #cbd5e1;
+  --text-strong: #f8fafc;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #1e293b 0%, #0f172a 55%, #020617 100%);
+  margin: 0;
+  color: var(--text-main);
+}
+
+header {
+  text-align: center;
+  padding: 32px 16px 12px;
+}
+
+header h1 {
+  margin: 0 0 6px;
+  color: var(--text-strong);
+}
+
+header p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.tagline {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: var(--accent-muted);
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px 50px;
+}
+
+/* Purpose */
+.about-card {
+  background: rgba(17, 24, 39, 0.95);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin: 24px auto;
+  max-width: 900px;
+}
+
+.about-title {
+  font-size: 1.05rem;
+  margin-bottom: 10px;
+  color: var(--accent-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.about-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* Progress */
+.progress-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 16px auto 6px;
+  background: #020617;
+  border-radius: 999px;
+  border: 1px solid #1e293b;
+  padding: 2px;
+}
+
+.progress-bar {
+  height: 22px;
+  width: 20%;
+  background: linear-gradient(to right, var(--accent-muted), var(--accent));
+  border-radius: 999px;
+  text-align: center;
+  color: #022c22;
+  font-weight: 600;
+  font-size: 0.85rem;
+  line-height: 22px;
+  transition: width 0.3s ease;
+}
+
+.progress-label {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.countdown {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--accent-muted);
+  margin-bottom: 20px;
+}
+
+/* Tabs */
+.tab {
+  text-align: center;
+  margin: 20px auto;
+}
+
+.tab button {
+  background: transparent;
+  border: 1px solid var(--card-border);
+  color: var(--text-muted);
+  padding: 8px 14px;
+  margin: 4px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.tab button.active {
+  background: var(--accent);
+  color: #022c22;
+  font-weight: 600;
+}
+
+/* Content */
+.tabcontent {
+  display: none;
+  background: rgba(17, 24, 39, 0.95);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.tabcontent h2 {
+  margin-top: 0;
+  color: var(--text-strong);
+}
+
+.section-title {
+  font-weight: 600;
+  margin-top: 14px;
+}
+
+ul {
+  margin: 6px 0 12px 18px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  border: 1px solid var(--card-border);
+  color: var(--text-muted);
+}
+
+/* Footer */
+.footer {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid var(--card-border);
+  text-align: center;
+}
+
+.footer-text {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.footer-buttons a {
+  display: inline-block;
+  margin: 0 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--card-border);
+  text-decoration: none;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  background: #020617;
+}
+
+.footer-buttons a:hover {
+  border-color: var(--accent);
+  color: var(--accent-muted);
+}
+</style>
+
+<script>
+const totalWeeks = 5;
+const examDate = new Date("2026-02-11T00:00:00");
+
+function openWeek(evt, weekId, weekNumber) {
+  document.querySelectorAll(".tabcontent").forEach(c => c.style.display = "none");
+  document.querySelectorAll(".tab button").forEach(b => b.classList.remove("active"));
+  document.getElementById(weekId).style.display = "block";
+  evt.currentTarget.classList.add("active");
+  updateProgress(weekNumber);
+}
+
+function updateProgress(week) {
+  const percent = Math.round((week / totalWeeks) * 100);
+  const bar = document.getElementById("progressBar");
+  bar.style.width = percent + "%";
+  bar.textContent = `Week ${week} of ${totalWeeks}`;
+}
+
+function updateCountdown() {
+  const diff = examDate - new Date();
+  if (diff <= 0) {
+    document.getElementById("countdown").textContent = "Exam day 🚀";
+    return;
+  }
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  document.getElementById("countdown").textContent =
+    `${days} days until exam (11 Feb)`;
+}
+
+window.onload = function() {
+  document.getElementById("defaultTab").click();
+  updateCountdown();
+  setInterval(updateCountdown, 3600000);
+};
+</script>
+</head>
+
+<body>
+
+<header>
+  <h1>NVIDIA AI Infrastructure & Operations</h1>
+  <p>NCA-AIIO - Certified ✓</p>
+  <div class="tagline">Training the infrastructure, not the model.</div>
+</header>
+
+<div class="container">
+
+<!-- PURPOSE -->
+<div class="about-card">
+  <div class="about-title">Purpose</div>
+  <p class="about-text">
+    This certification focuses on what actually changes when infrastructure is
+    built to support AI workloads - not just running models, but operating the
+    systems that make them reliable, scalable, and efficient.
+  </p>
+  <p class="about-text">
+    As AI becomes a production concern for infrastructure and operations teams,
+    this programme strengthens my ability to reason about GPU architecture,
+    accelerated networking, orchestration, and operational trade-offs.
+  </p>
+  <p class="about-text">
+    This learning directly supports my role in operations by ensuring I remain
+    fluent in the infrastructure platforms and operational considerations that
+    increasingly underpin customer-facing and internal systems.
+  </p>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-container">
+  <div id="progressBar" class="progress-bar">Week 1 of 5</div>
+</div>
+<div class="progress-label"></div>
+<div id="countdown" class="countdown"></div>
+
+<!-- TABS -->
+<div class="tab">
+  <button id="defaultTab" onclick="openWeek(event,'Week1',1)">Week 1</button>
+  <button onclick="openWeek(event,'Week2',2)">Week 2</button>
+  <button onclick="openWeek(event,'Week3',3)">Week 3</button>
+  <button onclick="openWeek(event,'Week4',4)">Week 4</button>
+  <button onclick="openWeek(event,'Week5',5)">Week 5</button>
+</div>
+
+<!-- WEEK 1 -->
+<div id="Week1" class="tabcontent">
+<h2>Week 1 - Essential AI Knowledge</h2>
+<span class="badge">Foundations</span>
+
+<p class="section-title">Context</p>
+<p>This week establishes the mental models needed to reason about AI infrastructure,
+focusing on terminology, architectures, and why AI workloads stress systems differently.</p>
+
+<p class="section-title">Key Topics</p>
+<ul>
+<li>AI vs ML vs Deep Learning</li>
+<li>Training vs inference characteristics</li>
+<li>CPU vs GPU architecture differences</li>
+<li>NVIDIA AI software stack (CUDA, cuDNN, TensorRT)</li>
+</ul>
+
+<p class="section-title">Resources</p>
+<ul>
+<li>NVIDIA AI Infrastructure & Operations Fundamentals - Units 1, 2, 4, 5</li>
+<li>CPU vs GPU: What’s the Difference?</li>
+<li>Deep Learning Training vs Inference (Medium)</li>
+<li>NVIDIA GPU Operator overview</li>
+</ul>
+</div>
+
+<!-- WEEK 2 -->
+<div id="Week2" class="tabcontent">
+<h2>Week 2 - AI Infrastructure (Part 1)</h2>
+<span class="badge">Compute & Scaling</span>
+
+<p class="section-title">Context</p>
+<p>Focus on how AI workloads map to physical hardware and what changes when GPUs
+are introduced at scale.</p>
+
+<p class="section-title">Key Topics</p>
+<ul>
+<li>GPU requirements for AI workloads</li>
+<li>Scaling GPU infrastructure</li>
+<li>Power density and cooling constraints</li>
+<li>On-prem vs cloud trade-offs</li>
+</ul>
+
+<p class="section-title">Resources</p>
+<ul>
+<li>Accelerating AI with GPUs - NVIDIA</li>
+<li>NVIDIA DGX H100 System overview</li>
+<li>Power Constraints and AI Workloads</li>
+</ul>
+</div>
+
+<!-- WEEK 3 -->
+<div id="Week3" class="tabcontent">
+<h2>Week 3 - AI Infrastructure (Part 2 )</h2>
+<span class="badge">Networking & DPUs</span>
+
+<p class="section-title">Context</p>
+<p>Explores the networking and data movement challenges unique to AI training and
+inference environments.</p>
+
+<p class="section-title">Key Topics</p>
+<ul>
+<li>Accelerated cluster components</li>
+<li>InfiniBand, NVLink, NVSwitch</li>
+<li>Data center networking protocols</li>
+<li>Role of DPUs in AI environments</li>
+</ul>
+
+<p class="section-title">Resources</p>
+<ul>
+<li>NVIDIA DGX SuperPOD reference architecture</li>
+<li>InfiniBand key features</li>
+<li>NVIDIA BlueField DPU overview</li>
+</ul>
+</div>
+
+<!-- WEEK 4 -->
+<div id="Week4" class="tabcontent">
+<h2>Week 4 - AI Operations</h2>
+<span class="badge">Operations</span>
+
+<p class="section-title">Context</p>
+<p>Shifts from infrastructure design to day-2 operations: monitoring, orchestration,
+and efficient resource usage.</p>
+
+<p class="section-title">Key Topics</p>
+<ul>
+<li>AI data center monitoring</li>
+<li>Cluster orchestration & job scheduling</li>
+<li>GPU utilisation metrics</li>
+<li>Virtualisation & MIG considerations</li>
+</ul>
+
+<p class="section-title">Resources</p>
+<ul>
+<li>NVIDIA DCGM</li>
+<li>NVIDIA Base Command</li>
+<li>Kubernetes scheduling concepts</li>
+<li>Slurm workload manager overview</li>
+</ul>
+</div>
+
+<!-- WEEK 5 -->
+<div id="Week5" class="tabcontent">
+<h2>Week 5 - Consolidation & Exam Readiness</h2>
+<span class="badge">Revision</span>
+
+<p class="section-title">Context</p>
+<p>Focused consolidation to ensure concepts are understood holistically and can be
+explained clearly under exam conditions.</p>
+
+<p class="section-title">Activities</p>
+<ul>
+<li>Review all exam objectives</li>
+<li>Revisit weak domains</li>
+<li>Practice verbal explanations</li>
+<li>Light revision & rest</li>
+</ul>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-text">Connect & follow the journey:</div>
+  <div class="footer-buttons">
+    <a href="https://www.linkedin.com/in/eirini-panteli-6b137957" target="_blank">LinkedIn</a>
+    <a href="https://instagram.com/ereeneee" target="_blank">Instagram</a>
+  </div>
+  <div style="margin-top:20px; font-size:0.85rem; color:var(--text-muted);">
+    © Eirini.cloud - Operating AI systems, not just deploying them 🚀
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>

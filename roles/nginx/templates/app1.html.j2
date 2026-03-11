@@ -1,0 +1,821 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-5KdZD7tcDX1jTUbVVC_P-.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+    <meta charset="UTF-8">
+    <title>Eirini - 12 Week Technical Depth Programme</title>
+    <style>
+
+    :root {
+    --bg: #0f172a;                 /* Deep slate */
+    --bg-alt: #111827;             /* Soft charcoal */
+    --card-bg: #111827;
+    --card-border: #334155;        /* Muted slate border */
+
+    --accent: #2dd4bf;             /* Soft teal (confidence, not loud) */
+    --accent-soft: #5eead4;
+    --accent-muted: #99f6e4;
+
+    --text-main: #e5e7eb;
+    --text-muted: #cbd5e1;
+    --text-strong: #f8fafc;
+
+    --tab-bg: #0f172a;
+    --tab-active: #2dd4bf;
+    --tab-hover: #1e293b;
+}
+
+        * {
+            box-sizing: border-box;
+        }
+
+       body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: radial-gradient(
+        circle at top,
+        #1e293b 0%,
+        #0f172a 55%,
+        #020617 100%
+    );
+    margin: 0;
+    padding: 0;
+    color: var(--text-main);
+}
+
+
+        header {
+            padding: 24px 16px 10px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+            font-size: 1.8rem;
+            color: var(--text-strong);
+        }
+
+        header p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto 40px;
+            padding: 0 16px 40px;
+        }
+
+        /* About Me */
+        .about-card {
+            background: rgba(17, 24, 39, 0.95);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin: 10px auto 20px;
+        }
+
+        .about-title {
+            font-size: 1.1rem;
+            margin: 0 0 6px;
+            color: var(--accent-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .about-text {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-main);
+        }
+
+        /* Progress */
+        .progress-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 16px auto 24px;
+            background: #020617;
+            border-radius: 999px;
+            border: 1px solid #1e293b;
+            padding: 2px;
+        }
+
+        .progress-bar {
+            width: 75%;
+            height: 22px;
+            background: linear-gradient(to right, var(--accent-soft), var(--accent));
+            border-radius: 999px;
+            text-align: center;
+            color: #042f2e;
+            font-weight: 600;
+            font-size: 0.85rem;
+            line-heig
+ht: 22px;
+        }
+
+        .progress-label {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        /* Tabs */
+        .tab {
+            overflow-x: auto;
+            white-space: nowrap;
+            background-color: transparent;
+            margin-bottom: 10px;
+            padding-bottom: 4px;
+        }
+
+        .tab-inner {
+            display: inline-flex;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid #1e293b;
+            padding: 2px;
+        }
+
+        .tab button {
+            background-color: transparent;
+            color: var(--text-muted);
+            border: none;
+            outline: none;
+            padding: 8px 14px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+            border-radius: 999px;
+            margin: 2px;
+            flex: 0 0 auto;
+        }
+
+        .tab button:hover {
+            background-color: var(--tab-hover);
+            color: var(--text-strong);
+        }
+
+        .tab button.active {
+            background-color: var(--tab-active);
+            color: #022c22;
+            font-weight: 600;
+        }
+
+        /* Week cards */
+        .tabcontent {
+            display: none;
+            padding: 18px 18px 16px;
+            background: rgba(15, 23, 42, 0.9);
+            margin: 0 auto 14px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        .tabcontent h2 {
+            margin-top: 0;
+            font-size: 1.1rem;
+            color: var(--text-strong);
+        }
+
+        .week-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .badge-row {
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 3px 9px;
+            border-radius: 999px;
+            border: 1px solid #1f2937;
+            color: var(--text-muted);
+            margin-right: 6px;
+        }
+
+        .badge-complete {
+            border-color: var(--accent-muted);
+            color: var(--accent-muted);
+        }
+
+        .badge-current {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .current-week-banner {
+            background: rgba(34, 197, 94, 0.08);
+            border-left: 3px solid var(--accent);
+            padding: 6px 10px;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            color: var(--accent-muted);
+        }
+
+        .week-section {
+            margin-bottom: 8px;
+        }
+
+        .week-section-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            color: var(--text-main);
+        }
+
+        .week-section p {
+            margin: 0 0 4px;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        .week-section ul {
+            margin: 0 0 6px 18px;
+            padding: 0;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .week-section li {
+            margin-bottom: 2px;
+        }
+
+        /* Social footer */
+        .footer {
+            margin-top: 26px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .footer-buttons {
+            margin-top: 8px;
+        }
+
+        .footer-buttons a {
+            display: inline-block;
+            margin: 0 6px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            border: 1px solid #1f2937;
+            text-decoration: none;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            background: #020617;
+            transition: 0.2s;
+        }
+
+        .footer-buttons a:hover {
+            border-color: var(--accent);
+            color: var(--accent-muted);
+            background: #020617;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            header h1 {
+                font-size: 1.4rem;
+            }
+            .tabcontent {
+                padding: 14px 12px;
+            }
+        }
+    </style>
+
+    <script>
+        function openWeek(evt, weekName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(weekName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+window.onload = function() {
+    // Show Week 10 by default
+    var defaultTab = document.getElementById("defaultWeek10Tab");
+    if (defaultTab) {
+        defaultTab.click();
+           }
+        };
+    </script>
+</head>
+
+<body>
+
+<header>
+    <h1>Eirini – 12 Week Technical Depth Programme</h1>
+    <p>Strengthening hands -on capability across cloud & infrastructure.</p>
+</header>
+
+<div class="container">
+
+    <!-- ABOUT ME -->
+    <div class="about-card">
+        <div class="about-title">About This Programme</div>
+        <p class="about-text">
+            My background spans network operations and people management, with hands-on experience across the platforms and practices that underpin production systems.
+            This 12-week structured programme is a deliberate investment in technical depth - refreshing and extending practical skills across networking, Linux, cloud infrastructure, automation, and reliability engineering.
+        </p>
+        <p class="about-text">
+            Each week builds on the last, with real deliverables rather than theory exercises. The programme culminates in a personal capstone project that brings together everything covered across the 12 weeks into a single end-to-end solution.
+        </p>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="progress-container">
+        <div class="progress-bar">Week 10 of 12</div>
+    </div>
+    <div class="progress-label">Current focus: Kubernetes fundamentals & Phi architecture.</div>
+
+    <!-- TABS -->
+    <div class="tab">
+        <div class="tab-inner">
+            <button class="tablinks" onclick="openWeek(event, 'Week1')">Week 1</button>
+            <button class="tablinks" onclick="openWeek(event, 'Week2')">Week 2</button>
+            <button class="tablinks" onclick="openWeek(event, 'Week3')">Week 3</button>
+            <button class="tablinks" onclick="openWeek(event, 'Week4')">Week 4</button>
+            <button class="tablinks" onclick="openWeek(event, 'Week5')">Week 5</button>
+            <button class="tablinks" onclick="openWeek(event, 'Week6')">Week 6</button>
+            <button class="tablinks" onclick="openWeek(event, 'Week7')">Week 7</button>
+            <button class="tablinks" onclick="openWeek(event, 'Week8')">Week 8</button>
+            <button class="tablinks" onclick="openWeek(event, 'Week9')">Week 9</button>
+            <button class="tablinks" id="defaultWeek10Tab" onclick="openWeek(event, 'Week10')">Week 10</button>
+            <button class="tablinks" onclick="openWeek(event, 'Week11')">Week 11</button>
+            <button class="tablinks" onclick="openWeek(event, 'Week12')">Week 12</button>
+        </div>
+    </div>
+
+    <!-- WEEK CONTENT -->
+
+    <div id="Week1" class="tabcontent">
+        <h2>Week 1: Networking Fundamentals (17-23 Nov)</h2>
+        <div class="week-meta">Status: <span class="badge badge-complete">Completed ✓</span></div>
+
+        <div class="week-section">
+            <div class="week-section-title">Focus</div>
+            <p>Refresh core networking concepts and rebuild confidence in designing and troubleshooting IP networks.</p>
+        </div>
+
+        <div class="week-section">
+            <div class="week-section-title">Key Topics</div>
+            <ul>
+                <li>Subnetting, VLANs, routing (OSPF/BGP)</li>
+                <li>NAT, VPNs, DNS, DHCP</li>
+                <li>Hybrid connectivity considerations (on-prem ↔ cloud)</li>
+            </ul>
+        </div>
+
+        <div class="week-section">
+            <div class="week-section-title">Hands-On Deliverable</div>
+            <p>EVE-NG lab: multi-subnet topology with routing and VPN between virtual networks, fully documented. Check out my LinkedIn post on Week 1.</p>
+        </div>
+    </div>
+
+    <div id="Week2" class="tabcontent">
+        <h2>Week 2: Linux Foundations (24-30 Nov)</h2>
+        <div class="week-meta">Status: <span class="badge badge-complete">Completed ✓</span></div>
+
+        <div class="week-section">
+            <div class="week-section-title">Focus</div>
+            <p>Rebuild day-to-day Linux confidence for working with servers, containers and cloud instances.</p>
+        </div>
+
+        <div class="week-section">
+            <div class="week-section-title">Key Topics</div>
+            <ul>
+                <li>Filesystem layout, permissions, users & groups</li>
+                <li>systemctl, processes, logs, networking tools</li>
+                <li>Mounts and storage: NFS, fstab, NAS integration</li>
+            </ul>
+        </div>
+
+        <div class="week-section">
+            <div class="week-section-title">Hands-On Deliverable</div>
+            <p>Health & log rotation script plus a persistent NAS mount, combining monitoring, storage and automation.</p>
+        </div>
+    </div>
+
+    <div id="Week3" class="tabcontent">
+        <h2>Week 3: AWS Cloud Fundamentals (1–7 Dec)</h2>
+        <div class="week-meta">Status: <span class="badge badge-complete">Completed ✓</span></div>
+
+        <div class="week-section">
+            <div class="week-section-title">Focus</div>
+            <p>Build a working AWS environment from scratch: networking, compute, storage and identity.</p>
+        </div>
+
+        <div class="week-section">
+            <div class="week-section-title">Key Topics</div>
+            <ul>
+                <li>Custom VPC, subnets, route tables, Internet Gateway</li>
+                <li>EC2 instance with NGINX serving a custom webpage</li>
+                <li>IAM roles and S3 bucket with static website hosting</li>
+                <li>Versioning, lifecycle rules and encryption for S3</li>
+            </ul>
+        </div>
+
+        <div class="week-section">
+            <div class="week-section-title">Hands-On Deliverable</div>
+            <p>EC2 web server integrated with an S3 static website, including IAM role-based access and cost-optimised S3 configuration.</p>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+<!-- WEEK 4 -->
+<!-- ========================= -->
+<div id="Week4" class="tabcontent">
+    <h2>Week 4: Load Balancing, HTTPS & High Availability (8–14 Dec)</h2>
+    <div class="week-meta">Status: <span class="badge badge-complete">Completed ✓</span></div>
+
+    <div class="week-section">
+        <div class="week-section-title">Focus</div>
+        <p>
+            Transition from a single-instance web service to a resilient,
+            production-style architecture using AWS load balancing and secure traffic handling.
+        </p>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Key Topics</div>
+        <ul>
+            <li>Application Load Balancer (ALB) architecture and request flow</li>
+            <li>Target groups, listener rules and health checks</li>
+            <li>Multi-AZ load balancing and failure handling</li>
+            <li>Path-based routing for multiple backend services</li>
+            <li>HTTPS termination using AWS Certificate Manager (ACM)</li>
+            <li>Custom domain configuration and HTTP → HTTPS redirection</li>
+        </ul>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Hands-On Deliverables</div>
+        <p>
+            A custom domain (<strong>eirini.cloud</strong>) secured with HTTPS,
+            fronted by an Application Load Balancer routing traffic to multiple EC2-backed
+            applications (<code>/</code>, <code>/app1</code>, <code>/app2</code>),
+            with validated health checks and high availability.
+        </p>
+    </div>
+</div>
+
+<!-- ========================= -->
+<!-- WEEK 5 -->
+<!-- ========================= -->
+<div id="Week5" class="tabcontent">
+    <h2>Week 5: Terraform – Infrastructure as Code (15–21 Dec)</h2>
+        <div class="week-meta">Status: <span class="badge badge-complete">Completed ✓</span></div>
+
+    <div class="week-section">
+        <div class="week-section-title">Focus</div>
+        <p>
+            Convert the existing AWS environment into declarative,
+            version-controlled infrastructure using Terraform.
+        </p>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Key Topics</div>
+        <ul>
+            <li>Terraform providers, resources, variables and outputs</li>
+            <li>State management and execution planning</li>
+            <li>Describing VPCs, EC2 instances, security groups and ALBs as code</li>
+            <li>Rebuilding the Week 4 architecture from scratch using Terraform</li>
+        </ul>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Planned Deliverable</div>
+        <p>
+            A Terraform codebase capable of recreating the full AWS environment
+            (networking, load balancing, HTTPS and backend services)
+            in a repeatable and auditable way.
+
+        </p>
+        <p>
+            At the same time, I completed NVIDIA’s course “Introduction to Transformer-Based Natural Language Processing” to better understand the nature of modern workloads that infrastructure teams increasingly need to support, particularly around GPU utilisation, memory and inference behaviour versus training.     
+         </p>
+</div>
+</div>
+
+<!-- ========================= -->
+<!-- WEEK 6 -->
+<!-- ========================= -->
+<div id="Week6" class="tabcontent">
+    <h2>Week 6: Ansible & Configuration Automation (22–28 Dec)</h2>
+        <div class="week-meta">Status: <span class="badge badge-complete">Completed ✓</span></div>
+
+    <div class="week-section">
+        <div class="week-section-title">Focus</div>
+        <p>
+            Automate operating system and application configuration so servers
+            are configured consistently after provisioning.
+        </p>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Key Topics</div>
+        <ul>
+            <li>Ansible inventories, playbooks and roles</li>
+            <li>Idempotent configuration management</li>
+            <li>Service configuration, package management and hardening</li>
+            <li>Terraform (provision) + Ansible (configure) workflow</li>
+        </ul>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Planned Deliverable</div>
+        <p>
+            Ansible playbooks that configure NGINX, deploy application content
+            and apply baseline hardening on Terraform-provisioned hosts.
+        </p>
+    </div>
+</div>
+
+<!-- ========================= -->
+<!-- WEEK 7 -->
+<!-- ========================= -->
+<div id="Week7" class="tabcontent">
+    <h2>Week 7: CI/CD for Infrastructure (29 Dec – 4 Jan)</h2>
+    <div class="week-meta">Status: <span class="badge badge-complete">Completed ✓</span></div>
+    <div class="week-section">
+        <div class="week-section-title">Focus</div>
+        <p>
+            Establish infrastructure as a controlled, auditable delivery process
+            using CI/CD principles rather than manual execution.
+        </p>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Key Topics</div>
+        <ul>
+            <li>GitHub as the single source of truth for infrastructure</li>
+            <li>Terraform plan vs apply separation</li>
+            <li>Remote Terraform state (S3 + DynamoDB locking)</li>
+            <li>Secure AWS authentication using GitHub OIDC (no static keys)</li>
+            <li>Manual approval gates for production changes</li>
+        </ul>
+    </div>
+
+    <div class="week-section">
+  	<div class="week-section-title">Hands-On Deliverable</div>
+ 	 <ul>
+   	    <li>GitHub (eirini-cloud) Actions pipeline enforcing <code>plan → review → apply</code> for infrastructure changes</li>
+    	    <li>Terraform remote state stored in S3 with DynamoDB state locking</li>
+    	    <li>Secure AWS authentication using GitHub OIDC (no static credentials)</li>
+            <li>Manual approval gates for production infrastructure changes</li>
+        </ul>
+    </div>
+</div>
+<!-- ========================= -->
+<!-- WEEK 8 -->
+<!-- ========================= -->
+<div id="Week8" class="tabcontent">
+    <h2>Week 8: Observability Foundations (5-11 Jan)</h2>
+    <div class="week-meta">Status: <span class="badge badge-complete">Completed ✓</span></div>
+
+    <div class="week-section">
+        <div class="week-section-title">Focus</div>
+        <p>
+            Establish a strong observability baseline by understanding what to monitor,
+            why alerts fire, and how metrics reflect real system behaviour - before introducing
+            additional tooling.
+        </p>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Key Topics</div>
+        <ul>
+            <li>CloudWatch metrics and dashboards</li>
+            <li>Metric aggregation, periods and resolution</li>
+            <li>Alert thresholds, evaluation periods and datapoints</li>
+            <li>Signal vs noise in alerting</li>
+            <li>Correlating metrics with real incidents and behaviour</li>
+        </ul>
+    </div>
+<div class="week-section">
+  <div class="week-section-title">Hands-On Deliverable</div>
+  <ul>
+    <li>CloudWatch dashboards for Application Load Balancer request count and latency</li>
+    <li>Alarms for no-traffic detection and elevated target response time</li>
+    <li>Alert thresholds tuned to reduce noise and false positives</li>
+    <li>Baseline operational visibility for a live AWS-hosted service</li>
+  </ul>
+</div>
+
+</div>
+
+<!-- ========================= -->
+<!-- WEEK 9 FML -->
+<!-- ========================= -->
+<div id="Week9" class="tabcontent">
+    <h2>Week 9: Containers, CI Security & AWS Integration (12–18 Jan)</h2>
+    <div class="week-meta">Status: <span class="badge badge-complete">Completed ✓</span></div>
+
+    <div class="week-section">
+        <div class="week-section-title">Focus</div>
+        <p>
+            Package an application into a container, build a security-aware CI pipeline,
+            and integrate the containerised workload into the existing AWS infrastructure.
+        </p>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Key Topics</div>
+        <ul>
+            <li>Docker image builds and minimal base images (nginx:alpine)</li>
+            <li>GHCR as a container registry with Git SHA tagging for traceability</li>
+            <li>Trivy vulnerability scanning integrated into GitHub Actions</li>
+            <li>Supply chain hardening: observation mode before policy enforcement</li>
+            <li>Terraform updates to wire containers into the existing ALB and target groups</li>
+        </ul>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Hands-On Deliverables</div>
+        <ul>
+            <li>Docker image built and pushed to GHCR via GitHub Actions on every commit</li>
+            <li>Git SHA tagging providing full end-to-end traceability from commit to running image</li>
+            <li>Trivy scan integrated into CI pipeline - <strong>zero CVEs</strong> on alpine/nginx base</li>
+            <li>Terraform ALB and target group configuration updated to route to containerised workload</li>
+            <li>docker-compose.yml for local development workflow</li>
+        </ul>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Key Insight</div>
+        <p>
+            Choosing a minimal base image (nginx:alpine) is not just a performance decision -
+            it directly reduces the attack surface and results in a clean vulnerability scan.
+            Security starts at image design, not just at the scanning stage.
+        </p>
+    </div>
+</div>
+
+<!-- ========================= -->
+<!-- WEEK 10 -->
+<!-- ========================= -->
+<div id="Week10" class="tabcontent">
+    <h2>Week 10: Kubernetes Fundamentals (Mar 2026)</h2>
+    <div class="current-week-banner">Current Week</div>
+    <div class="week-meta">Status: <span class="badge badge-current">In Progress</span></div>
+
+    <div class="week-section">
+        <div class="week-section-title">Focus</div>
+        <p>
+            Build practical Kubernetes understanding as a control plane for distributed systems
+            and container orchestration - the natural progression from Week 9's container foundations.
+        </p>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Key Topics</div>
+        <ul>
+            <li>Clusters, nodes, pods and deployments</li>
+            <li>Services, ingress and service discovery</li>
+            <li>ConfigMaps, namespaces and resource management</li>
+            <li>Scaling behaviour and failure handling</li>
+            <li>Operational comparison: ECS vs Kubernetes</li>
+        </ul>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Hands-On Deliverable</div>
+        <p>
+            A Kubernetes workload deployed and exposed via a service or ingress in a home lab environment,
+            with kubectl fluency built through real cluster interaction.
+        </p>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Phi - Architecture & Design</div>
+        <p>
+            Alongside Kubernetes study, Week 10 marks the start of <strong>Phi</strong> -
+            a personal open-source project building a Decision Explainability framework for AIOps.
+            This week focuses on architecture: defining the LangGraph graph topology, MCP server contracts,
+            RAG pipeline design, and publishing the public GitHub repo with initial documentation.
+        </p>
+    </div>
+</div>
+
+<!-- ========================= -->
+<!-- WEEK 11 -->
+<!-- ========================= -->
+<div id="Week11" class="tabcontent">
+    <h2>Week 11: Reliability, Observability Depth & Operations (Apr 2026)</h2>
+    <div class="week-meta">Status: <span class="badge">Planned</span></div>
+
+    <div class="week-section">
+        <div class="week-section-title">Focus</div>
+        <p>
+            Deepen operational maturity by layering reliability concepts and advanced
+            observability tooling on top of stable workloads.
+        </p>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Key Topics</div>
+        <ul>
+            <li>Prometheus metrics and scraping model</li>
+            <li>Grafana dashboards and visualisation</li>
+            <li>SLIs, SLOs and error budgets</li>
+            <li>Log pipelines and basic correlation</li>
+            <li>Operational runbooks and response patterns</li>
+        </ul>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Hands-On Deliverable</div>
+        <p>
+            An operationally meaningful observability setup aligned to reliability goals,
+            not just raw metrics - instrumented against a real running workload.
+        </p>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Phi - Core Build</div>
+        <p>
+            Week 11 moves Phi from design to implementation: building the LangGraph agent,
+            wiring the first MCP server, and standing up the RAG pipeline with real or synthetic
+            network decision data. Target: Phi produces its first end-to-end explainability output -
+            answering "why did this system make this decision?" with structured reasoning.
+            Phi is instrumented with its own logging and tracing, applying the week's observability lessons directly.
+        </p>
+    </div>
+</div>
+
+<!-- ========================= -->
+<!-- WEEK 12 -->
+<!-- ========================= -->
+<div id="Week12" class="tabcontent">
+    <h2>Week 12: Capstone - Phi v1.0 Launch (May 2026)</h2>
+    <div class="week-meta">Status: <span class="badge">Planned</span></div>
+
+    <div class="week-section">
+        <div class="week-section-title">Focus</div>
+        <p>
+            Consolidate all programme learning into a final end-to-end project:
+            the public release of <strong>Phi v1.0</strong> - a Decision Explainability framework for AIOps,
+            containerised, documented, and deployed.
+        </p>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">Capstone Deliverables</div>
+        <ul>
+            <li>Phi v1.0 - working prototype with a clear, demo-ready explainability use case</li>
+            <li>Containerised with Docker, deployed to Kubernetes in home lab</li>
+            <li>Public GitHub release with architecture documentation and setup guide</li>
+            <li>Short demo video published on LinkedIn and eirini.cloud</li>
+            <li>End-to-end: infrastructure as code → CI/CD → containers → observability → explainability</li>
+        </ul>
+    </div>
+
+    <div class="week-section">
+        <div class="week-section-title">What Phi Is</div>
+        <p>
+            Phi is a personal open-source project - a LangGraph-based agent that explains
+            infrastructure and network decisions in plain language. It answers questions like
+            "why did the SD-WAN controller reroute traffic at 14:32?" using a RAG pipeline
+            over operational logs, with MCP tool integration for live system context.
+            Built on my own time, Phi is the thread that connects everything learned in this programme.
+        </p>
+    </div>
+</div>
+
+    <!-- FOOTER / SOCIAL -->
+    <div class="footer">
+        <div>Connect & follow the journey:</div>
+        <div class="footer-buttons">
+            <a href="https://www.linkedin.com/in/eirini-panteli-6b137957" target="_blank">LinkedIn</a>
+            <a href="https://instagram.com/ereeneee" target="_blank">Instagram</a>
+        </div>
+        <div style="margin-top: 16px; font-size: 0.85rem; color: var(--text-muted);">
+            © Eirini - powered by continuous technical development 🚀
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
